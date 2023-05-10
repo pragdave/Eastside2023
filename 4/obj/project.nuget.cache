@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "2+ooklabNMIc0FUFDGgw4qM/Jmc+ixWXXLGJgOU5SMtm1ThFvPFPQdKUwoNOIrvg+p2aVK520D8XAGwG+HRWaA==",
+  "success": true,
+  "projectFilePath": "/Users/dave/Me/Courses/Eastside2023/4/4.fsproj",
+  "expectedPackageFiles": [
+    "/Users/dave/.nuget/packages/fsharp.core/7.0.200/fsharp.core.7.0.200.nupkg.sha512"
+  ],
+  "logs": []
+}

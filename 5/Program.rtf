@@ -1,0 +1,61 @@
+{\rtf1\ansi\uc0\deff0{\fonttbl{\f0\fmodern\fprq1\fcharset0;}}{\colortbl;\red101\green123\blue131;\red147\green161\blue161;\red211\green54\blue130;\red133\green153\blue0;\red42\green161\blue152;\red203\green75\blue22;\red181\green137\blue0;\red38\green139\blue210;\red220\green50\blue47;}\f0 {\cf4 type}{\cf1  }{\cf8 Anagrams}{\cf1  }{\cf2 =}{\cf1  }{\cf7 list}{\cf2 <}{\cf7 string}{\cf2 >}{\cf1 \par
+}{\cf4 type}{\cf1  }{\cf8 Dictionary}{\cf1  }{\cf2 =}{\cf1  }{\cf1 Map}{\cf2 <}{\cf7 string}{\cf2 ,}{\cf1  }{\cf1 Anagrams}{\cf2 >}{\cf1 \par
+\par
+}{\cf4 let}{\cf1  }{\cf8 generateSignature}{\cf1  }{\cf2 (}{\cf1 word}{\cf1  }{\cf2 :}{\cf1  }{\cf7 string}{\cf2 )}{\cf1  }{\cf2 :}{\cf1  }{\cf7 string}{\cf1   }{\cf2 =}{\cf1 \par
+    }{\cf1 word}{\cf1  }{\cf2 |}{\cf2 >}{\cf1  }{\cf8 Seq}{\cf1 .}{\cf1 sort}{\cf1  }{\cf2 |}{\cf2 >}{\cf1  }{\cf8 System}{\cf1 .}{\cf8 String}{\cf1 .}{\cf1 Concat}{\cf1 \par
+\par
+}{\cf4 let}{\cf1  }{\cf8 readLines}{\cf1  }{\cf2 =}{\cf1  }{\cf8 System}{\cf1 .}{\cf8 IO}{\cf1 .}{\cf8 File}{\cf1 .}{\cf1 ReadLines}{\cf2 (}{\cf5 "}{\cf5 words.txt}{\cf5 "}{\cf2 )}{\cf1 \par
+\par
+}{\cf4 let}{\cf1  }{\cf8 addToOrCreateList}{\cf1  }{\cf1 maybeList}{\cf1  }{\cf1 word}{\cf1  }{\cf2 =}{\cf1 \par
+  }{\cf4 match}{\cf1  }{\cf1 maybeList}{\cf1  }{\cf4 with}{\cf1 \par
+  }{\cf2 |}{\cf1  }{\cf1 Some}{\cf1  }{\cf1 existing}{\cf1  }{\cf2 ->}{\cf1  }{\cf1 Some}{\cf1  }{\cf2 (}{\cf1  }{\cf1 existing}{\cf1  }{\cf2 |}{\cf2 >}{\cf1  }{\cf8 List}{\cf1 .}{\cf1 append}{\cf1  }{\cf2 [}{\cf1 word}{\cf2 ]}{\cf2 )}{\cf1 \par
+  }{\cf2 |}{\cf1  }{\cf1 None}{\cf1           }{\cf2 ->}{\cf1  }{\cf1 Some}{\cf1  }{\cf2 [}{\cf1  }{\cf1 word}{\cf1  }{\cf2 ]}{\cf1 \par
+\par
+}{\cf4 let}{\cf1  }{\cf8 addToDictionary}{\cf1  }{\cf1 signature}{\cf1  }{\cf1 word}{\cf1  }{\cf1 dictionary}{\cf1  }{\cf2 =}{\cf1 \par
+  }{\cf8 Map}{\cf1 .}{\cf1 change}{\cf1  }{\cf1 signature}{\cf1  }{\cf2 (}{\cf4 fun}{\cf1  }{\cf1 entry}{\cf1  }{\cf2 ->}{\cf1  }{\cf1 addToOrCreateList}{\cf1  }{\cf1 entry}{\cf1  }{\cf1 word}{\cf2 )}{\cf1  }{\cf1 dictionary}{\cf1 \par
+\par
+}{\cf4 let}{\cf1  }{\cf8 mergeInWord}{\cf1  }{\cf1 result}{\cf1  }{\cf1 word}{\cf1  }{\cf2 =}{\cf1  \par
+  }{\cf1 addToDictionary}{\cf1  }{\cf2 (}{\cf1 generateSignature}{\cf1  }{\cf1 word}{\cf2 )}{\cf1  }{\cf1 word}{\cf1  }{\cf1 result}{\cf1 \par
+\par
+}{\cf4 let}{\cf1  }{\cf8 dictionary}{\cf1  }{\cf8 ()}{\cf1  }{\cf2 =}{\cf1 \par
+  }{\cf1 readLines}{\cf1  \par
+  }{\cf2 |}{\cf2 >}{\cf1  }{\cf8 Seq}{\cf1 .}{\cf1 fold}{\cf1  }{\cf1 mergeInWord}{\cf1  }{\cf8 Map}{\cf1 .}{\cf1 empty}{\cf1  \par
+\par
+}{\cf4 let}{\cf1  }{\cf8 findAnagrams}{\cf1  }{\cf2 (}{\cf1 dict}{\cf2 :}{\cf1  }{\cf1 Dictionary}{\cf2 )}{\cf1  }{\cf2 (}{\cf1 word}{\cf2 :}{\cf1  }{\cf7 string}{\cf2 )}{\cf1  }{\cf2 :}{\cf1  }{\cf1 Anagrams}{\cf1  }{\cf2 =}{\cf1 \par
+  }{\cf4 match}{\cf1  }{\cf1 word}{\cf1  }{\cf2 |}{\cf2 >}{\cf1  }{\cf1 generateSignature}{\cf1  }{\cf2 |}{\cf2 >}{\cf1  }{\cf1 dict}{\cf2 .}{\cf1 TryFind}{\cf1  }{\cf4 with}{\cf1 \par
+  }{\cf2 |}{\cf1  }{\cf1 None}{\cf1  }{\cf2 ->}{\cf1  }{\cf8 []}{\cf1 \par
+  }{\cf2 |}{\cf1  }{\cf1 Some}{\cf1  }{\cf1 anagrams}{\cf1  }{\cf2 ->}{\cf1  }{\cf1 anagrams}{\cf1 \par
+\par
+\par
+}{\cf4 let}{\cf1  }{\cf8 rec}{\cf1  }{\cf1 inputLoop}{\cf1  }{\cf2 (}{\cf1 dict}{\cf2 :}{\cf1  }{\cf1 Dictionary}{\cf2 )}{\cf1  }{\cf2 :}{\cf1  }{\cf1 int}{\cf1  }{\cf2 =}{\cf1 \par
+  }{\cf1 printf}{\cf1  }{\cf5 "}{\cf5 Enter word: }{\cf5 "}{\cf1 \par
+  }{\cf4 let}{\cf1  }{\cf8 word}{\cf1  }{\cf2 =}{\cf1  }{\cf8 System}{\cf1 .}{\cf8 Console}{\cf1 .}{\cf1 ReadLine}{\cf8 ()}{\cf1 \par
+  }{\cf4 if}{\cf1  }{\cf1 word}{\cf1  }{\cf2 =}{\cf1  }{\cf5 "}{\cf5 "}{\cf1  }{\cf4 then}{\cf1 \par
+    }{\cf5 0}{\cf1 \par
+  }{\cf4 else}{\cf1 \par
+    }{\cf1 findAnagrams}{\cf1  }{\cf1 dict}{\cf1  }{\cf1 word}{\cf1  }{\cf2 |}{\cf2 >}{\cf1  }{\cf1 printfn}{\cf1  }{\cf5 "}{\cf5 %A}{\cf5 "}{\cf1 \par
+    }{\cf1 inputLoop}{\cf1  }{\cf1 dict}{\cf1 \par
+\par
+\par
+\par
+}{\cf4 let}{\cf1  }{\cf8 mostAnagramsIn}{\cf1  }{\cf2 (}{\cf1 dict}{\cf2 :}{\cf1  }{\cf1 Dictionary}{\cf2 )}{\cf1  }{\cf2 =}{\cf1 \par
+  }{\cf1 dict}{\cf1  \par
+  }{\cf2 |}{\cf2 >}{\cf1  }{\cf8 Map}{\cf1 .}{\cf1 toList}{\cf1 \par
+  }{\cf2 |}{\cf2 >}{\cf1  }{\cf8 List}{\cf1 .}{\cf1 sortBy}{\cf1  }{\cf2 (}{\cf4 fun}{\cf1  }{\cf2 (}{\cf1 signature}{\cf2 ,}{\cf1  }{\cf1 anagrams}{\cf2 )}{\cf1  }{\cf2 ->}{\cf1  }{\cf1 anagrams}{\cf2 .}{\cf1 Length}{\cf2 )}{\cf1 \par
+  }{\cf2 |}{\cf2 >}{\cf1  }{\cf8 List}{\cf1 .}{\cf1 last}{\cf1 \par
+\par
+}{\cf4 let}{\cf1  }{\cf8 most}{\cf1  }{\cf2 (}{\cf1 dict}{\cf2 :}{\cf1  }{\cf1 Dictionary}{\cf2 )}{\cf1  }{\cf2 =}{\cf1 \par
+  }{\cf4 let}{\cf1  }{\cf8 chooseLongest}{\cf1  }{\cf2 (}{\cf1 len}{\cf2 ,}{\cf1  }{\cf1 longest}{\cf2 )}{\cf1  }{\cf2 _}{\cf1 signature}{\cf1  }{\cf2 (}{\cf1 anagrams}{\cf2 :}{\cf1  }{\cf1 Anagrams}{\cf2 )}{\cf1  }{\cf2 =}{\cf1 \par
+    }{\cf4 match}{\cf1  }{\cf1 anagrams}{\cf2 .}{\cf1 Length}{\cf1  }{\cf4 with}{\cf1 \par
+    }{\cf2 |}{\cf1  }{\cf1 newLen}{\cf1  }{\cf4 when}{\cf1  }{\cf2 (}{\cf1 newLen}{\cf1  }{\cf2 >}{\cf1  }{\cf1 len}{\cf2 )}{\cf1  }{\cf2 ->}{\cf1  }{\cf2 (}{\cf1 newLen}{\cf2 ,}{\cf1  }{\cf1 anagrams}{\cf2 )}{\cf1 \par
+    }{\cf2 |}{\cf1  }{\cf2 _}{\cf1 otherwise}{\cf1                  }{\cf2 ->}{\cf1  }{\cf2 (}{\cf1 len}{\cf2 ,}{\cf1  }{\cf1 longest}{\cf2 )}{\cf1 \par
+  }{\cf4 in}{\cf1 \par
+    }{\cf8 Map}{\cf1 .}{\cf1 fold}{\cf1  }{\cf1 chooseLongest}{\cf1  }{\cf2 (}{\cf5 0}{\cf2 ,}{\cf1  }{\cf8 []}{\cf2 )}{\cf1  }{\cf1 dict}{\cf1 \par
+\par
+}{\cf4 let}{\cf1  }{\cf8 pythag}{\cf1  }{\cf1 max}{\cf1  }{\cf2 =}{\cf1 \par
+  }{\cf2 [}{\cf1  }{\cf4 for}{\cf1  }{\cf1 a}{\cf1  }{\cf4 in}{\cf1  }{\cf5 3}{\cf2 ..}{\cf1 max}{\cf1  }{\cf4 do}{\cf1 \par
+      }{\cf4 for}{\cf1  }{\cf1 b}{\cf1  }{\cf4 in}{\cf1  }{\cf1 a}{\cf2 ..}{\cf1 max}{\cf1  }{\cf4 do}{\cf1 \par
+        }{\cf4 for}{\cf1  }{\cf1 c}{\cf1  }{\cf4 in}{\cf1  }{\cf1 b}{\cf2 ..}{\cf1 max}{\cf1  }{\cf4 do}{\cf1 \par
+          }{\cf4 if}{\cf1  }{\cf1 a}{\cf2 *}{\cf1 a}{\cf1  }{\cf2 +}{\cf1  }{\cf1 b}{\cf2 *}{\cf1 b}{\cf1  }{\cf2 =}{\cf1  }{\cf1 c}{\cf2 *}{\cf1 c}{\cf1  }{\cf4 then}{\cf1  }{\cf4 yield}{\cf1  }{\cf2 (}{\cf1 a}{\cf2 ,}{\cf1  }{\cf1 b}{\cf2 ,}{\cf1  }{\cf1 c}{\cf2 )}{\cf1 \par
+  }{\cf2 ]}{\cf1 \par
+}}
